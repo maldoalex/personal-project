@@ -1,0 +1,14 @@
+@import "../../App.scss";
+
+
+.log-in {
+ background: $primary-color;
+ font-family: $font-family-monospace;
+ width: 30vw;
+ display: flex;
+ flex-direction: column;
+
+ .title {
+  margin: 10px 0;
+ }
+}

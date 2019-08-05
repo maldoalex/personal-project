@@ -1,0 +1,49 @@
+@import "../../App.scss";
+
+.homepage {
+ background: $primary-color;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding: 15px 60px;
+ font-family: $font-family-monospace;
+}
+
+.tile-menu {
+ width: 100%;
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: space-between;
+}
+
+.tile {
+ @include flexCenter();
+ min-width: 25%;
+ height: 200px;
+ flex: 1 1 auto;
+ border: 1px solid black;
+ margin: 0 5px 10px;
+
+
+ .content {
+  @include flexCenter();
+  height: 70px;
+  padding: 0 25px;
+  flex-direction: column;
+  border: 1px solid black;
+
+  .title {
+   font-weight: bold;
+   margin-bottom: 4px;
+   font-size: 30px;
+   color: #4a4a4a;
+  }
+
+  .subtitle {
+   font-weight: lighter;
+   font-size: 16px;
+   text-decoration: none;
+
+  }
+ }
+}
