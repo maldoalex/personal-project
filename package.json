@@ -13,13 +13,18 @@
     "massive": "^5.11.2",
     "node": "^12.7.0",
     "node-sass": "^4.12.0",
+    "pure-react-carousel": "^1.21.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-scroll": "^1.7.12",
+    "react-slideshow-image": "^1.2.1",
     "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.1",
+    "reselect": "^4.0.0",
     "sass": "^1.22.9"
   },
   "scripts": {

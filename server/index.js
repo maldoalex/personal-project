@@ -3,7 +3,11 @@ const express = require("express");
 const app = express();
 const controller = require("./controller");
 const massive = require("massive");
-const { SERVER_PORT, CONNECTION_STRING } = process.env;
+const session = require("express-session");
+const authCtrl = require("./authController");
+const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
+
+app.use(express.json());
 
 massive(CONNECTION_STRING)
   .then(dbInstance => {
@@ -12,7 +16,13 @@ massive(CONNECTION_STRING)
   })
   .catch(error => console.log(error));
 
-app.use(express.json());
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: false,
+    secret: SESSION_SECRET
+  })
+);
 
 //hardware
 app.get("/api/hardware", controller.getAllHardware);
@@ -21,6 +31,10 @@ app.post("/api/hardware/", controller.addHardware);
 // app.delete("/api/hardware/:id", controller.deleteHardware);
 
 // //users
+app.post("/auth/register", authCtrl.register);
+app.post("/auth/login", authCtrl.login);
+app.get("/auth/logout", authCtrl.logout);
+
 // app.get("/api/users", controller.getAllUsers);
 // app.post("/api/users/", controller.addUser);
 // app.delete("/api/users/:id", controller.deleteUser);

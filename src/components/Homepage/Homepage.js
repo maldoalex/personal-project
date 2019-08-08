@@ -9,7 +9,7 @@ const HomePage = () => (
       <div className="tile">
         <div className="content">
           <div className="title">VINYL</div>
-          <Link to="/vinyl_shop" className="subtitle">
+          <Link to="/shop" className="subtitle">
             SHOP NOW
           </Link>
         </div>

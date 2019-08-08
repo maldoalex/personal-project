@@ -7,71 +7,59 @@ class VinylShop extends Component {
     super();
     this.state = {
       albums: [],
-      updatedAlbums: []
+      filteredAlbums: []
     };
   }
 
   componentDidMount() {
     axios
       .get(
-        "http://ws.audioscrobbler.com/2.0/?method=tag.gettopalbums&tag=1970s&limit=100&api_key=a524b0809a03f493e68a5abff436a312&format=json"
+        "http://ws.audioscrobbler.com/2.0/?method=tag.gettopalbums&tag=1970s&limit=50&api_key=a524b0809a03f493e68a5abff436a312&format=json"
       )
       .then(response => {
         console.log(response.data.albums.album);
-        this.setState({ albums: response.data.albums.album });
+        this.setState({
+          albums: response.data.albums.album,
+          filteredAlbums: response.data.albums.album
+        });
       })
       .catch(error => {
         console.log(error);
       });
   }
 
-  handleClick = e => {
-    let genre = e.target.name;
-    axios
-      .get(
-        `http://ws.audioscrobbler.com/2.0/?method=tag.gettopalbums&tag=${genre}&api_key=a524b0809a03f493e68a5abff436a312&format=json`
-      )
-      .then(response => {
-        console.log(this.state);
-        this.setState({ albums: response.data.albums.album });
-      });
-  };
-
   // handleChange = e => {
-  //   this.setState({
-  //     updatedAlbums: this.state.albums
+  //   let filterList = this.state.albums.filter(res => {
+  //     return res.artist.name.toLowerCase().search(e.target.value) !== -1;
   //   });
-  //   let filterList = this.state.updatedAlbums.filter(res => {
-  //     return res.name.toLowerCase().search(e.target.value) !== -1;
-  //   });
-
-  //   this.setState({ updatedAlbums: filterList });
+  //   this.setState({ filteredAlbums: filterList });
   // };
 
   render() {
-    let albumArtists = this.state.albums.map(albumArtist => {
-      console.log(this.state.albumArtist);
+    let filteredAlbums = this.state.filteredAlbums.map(albumArtist => {
+      console.log(this.state.filteredAlbums);
       return (
         <div className="1960s">
           <div>
             <img src={albumArtist.image[2]["#text"]} alt="album cover" />
+            <p>{albumArtist.artist.name}</p>
             <p>{albumArtist.name}</p>
           </div>
         </div>
       );
     });
-    return (
-      <div className="vinyl_shop">
-        <input onChange={this.handleChange} placeholder="search" />
-        <button name="rap" onClick={this.handleClick}>
-          Rap
-        </button>
-        <button name="rock" onClick={this.handleClick}>
-          Rock
-        </button>
-        <div>{albumArtists}</div>
-      </div>
-    );
+
+    // return (
+    //   <div className="vinyl_shop">
+    //     <input onChange={this.handleChange} placeholder="search" />
+
+    //     <div className="carousel-slide">
+    //       <div className="card">{filteredAlbums}</div>
+    //     </div>
+    //     <button>Prev</button>
+    //     <button>Next</button>
+    //   </div>
+    // );
   }
 }
 
